@@ -284,7 +284,8 @@ const ReactionYield = () => {
         reader.readAsText(file);
         return false; // 阻止默认上传行为
     };
-
+    const latestTaskIdRef = useRef(taskId);
+    useEffect(() => { latestTaskIdRef.current = taskId; }, [taskId]);
     const intervalIdRef = useRef(null);
     useEffect(() => {
         if (taskId !== "") {
@@ -298,7 +299,10 @@ const ReactionYield = () => {
                     }
                     setResults(response.data);
                 }).catch(error => {
-                    setInferencing(false);
+                    if (latestTaskIdRef.current === taskId){
+                        dispatch(clearYield());
+                        setInferencing(false);
+                    }
                 });
             }, 1000);
         }
@@ -310,7 +314,8 @@ const ReactionYield = () => {
         }
     }, [taskId, dispatch]);
 
-
+    const latestInferenceTaskIdRef = useRef(inferenceTaskId);
+    useEffect(() => { latestInferenceTaskIdRef.current = inferenceTaskId; }, [inferenceTaskId]);
     const inferenceIntervalIdRef = useRef(null);
     useEffect(() => {
         if (inferenceTaskId !== "") {
@@ -328,7 +333,10 @@ const ReactionYield = () => {
                     }
                     
                 }).catch(error => {
-                    setInferenceInferencing(false);
+                    if(latestInferenceTaskIdRef.current === inferenceTaskId){
+                        dispatch(clearInferenceYield());
+                        setInferenceInferencing(false);
+                    }
                 });
             }, 1000);
         }

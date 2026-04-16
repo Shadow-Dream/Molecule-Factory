@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import DescriptionIcon from '@mui/icons-material/Description';
 import CodeIcon from '@mui/icons-material/Code';
-import { HomeOutlined, LineChartOutlined, ApartmentOutlined } from '@ant-design/icons';
+import { HomeOutlined, LineChartOutlined, ApartmentOutlined,RadarChartOutlined,DatabaseOutlined } from '@ant-design/icons';
 import VaccinesIcon from '@mui/icons-material/Vaccines';
 import { useDispatch } from 'react-redux';
 import { setPage } from '../redux/store';
@@ -57,7 +57,7 @@ const Home = () => {
                 </div>
                 <Divider />
 
-                <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap' }}>
                     <Card title={<div style={{ display: "flex", gap: "10px" }}><VaccinesIcon />{"Reaction Condition Prediction"}</div>} bordered={false} style={{ width: '30%', marginBottom: '20px' }}>
 
 
@@ -77,7 +77,7 @@ const Home = () => {
                         </p>
                     </Card>
 
-                    <Card title={<div style={{ display: "flex", gap: "10px" }}><ApartmentOutlined />{"Reaction Classification"}</div>} bordered={false} style={{ width: '30%', marginBottom: '20px' }}>
+                    <Card title={<div style={{ display: "flex", gap: "10px" }}><RadarChartOutlined />{"Reaction Classification"}</div>} bordered={false} style={{ width: '30%', marginBottom: '20px' }}>
                         <p>
                             Trained on the Pistachio database, based on Reaction Graph and attention mechanisms. It offers high-accuracy reaction classification results, and can be utilized in tasks like data annotation and LLM pre-training.
                             <span
@@ -104,6 +104,38 @@ const Home = () => {
                                     marginLeft: "10px"
                                 }}
                                 onClick={() => dispatch(setPage("yield"))}
+                            >
+                                Try Now
+                            </span>
+                        </p>
+                    </Card>
+
+                    <Card title={<div style={{ display: "flex", gap: "10px" }}><ApartmentOutlined />{"Retrosynthesis"}</div>} bordered={false} style={{ width: '30%', marginBottom: '20px' }}>
+                        <p>
+                        RetroAux integrates molecular property knowledge into data-driven retrosynthesis models, supporting seamless integration with existing pipelines and achieves significant improvements in accuracy.
+                            <span
+                                style={{
+                                    color: '#1890ff',
+                                    cursor: 'pointer',
+                                    marginLeft: "10px"
+                                }}
+                                onClick={() => dispatch(setPage("retro"))}
+                            >
+                                Try Now
+                            </span>
+                        </p>
+                    </Card>
+
+                    <Card title={<div style={{ display: "flex", gap: "10px" }}><DatabaseOutlined />{"Reaction Database"}</div>} bordered={false} style={{ width: '30%', marginBottom: '20px' }}>
+                        <p>
+                        We integrate and filter six open-source datasets and the USPTO series to build a high-quality dataset containing 3.7 million curated reactions for large-scale model training and evaluation.
+                            <span
+                                style={{
+                                    color: '#1890ff',
+                                    cursor: 'pointer',
+                                    marginLeft: "10px"
+                                }}
+                                onClick={() => dispatch(setPage("database"))}
                             >
                                 Try Now
                             </span>

@@ -155,6 +155,8 @@ const ReactionType = () => {
     let productSmiles = ""
     const [results, setResults] = useImmer({});
 
+    const latestTaskIdRef = useRef(taskId);
+    useEffect(() => { latestTaskIdRef.current = taskId; }, [taskId]);
     const intervalIdRef = useRef(null);
     useEffect(() => {
         if (taskId !== "") {
@@ -176,7 +178,11 @@ const ReactionType = () => {
                     if ("result" in response.data)
                         setResults(prevResults => { prevResults["result"] = response.data.result });
                 }).catch(error => { 
-                    setInferencing(false);
+                    if (latestTaskIdRef.current === taskId){
+                        dispatch(clearType());
+                        setResults(prevResults => { prevResults["status"] = "failed" });
+                        setInferencing(false);
+                    }
                 });
             }, 1000);
         }

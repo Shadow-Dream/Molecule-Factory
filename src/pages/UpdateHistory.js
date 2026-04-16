@@ -6,6 +6,12 @@ const { Title, Text } = Typography;
 
 const historyData = [
   {
+    date: "2025.10.18",
+    updates: [
+      "Added Retrosynthesis"
+    ],
+  },
+  {
     date: "2025.5.22",
     updates: [
       "Added Large-scale Reaction Collection Database"

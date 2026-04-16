@@ -2,9 +2,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import './App.css';
 import styled from 'styled-components';
 import { Button, Divider, Layout, Menu } from 'antd';
-import { HomeOutlined, LineChartOutlined, ApartmentOutlined, QuestionOutlined, QuestionCircleOutlined, HistoryOutlined } from '@ant-design/icons';
+import { HomeOutlined, LineChartOutlined, ApartmentOutlined, QuestionOutlined, QuestionCircleOutlined, HistoryOutlined, DatabaseOutlined, RadarChartOutlined } from '@ant-design/icons';
 import VaccinesIcon from '@mui/icons-material/Vaccines';
-import { DatabaseOutlined } from "@ant-design/icons";
 import React, { useRef, useState } from 'react';
 import { setPage } from './redux/store';
 import ReactionType from './pages/ReactionType';
@@ -20,6 +19,7 @@ import { Footer } from 'antd/es/layout/layout';
 import HomeFooter from './pages/HomeFooter';
 import UpdateHistory from './pages/UpdateHistory';
 import ReactionDatabase from './pages/ReactionDatabase';
+import Retrosynthesis from './pages/Retrosynthesis';
 const { Header, Sider, Content } = Layout;
 
 const MoleculeFactoryTitle = styled.div`
@@ -99,7 +99,7 @@ function App() {
           <Menu.Item key="home" icon={<HomeOutlined />}>
             Home
           </Menu.Item>
-          <Menu.Item key="type" icon={<ApartmentOutlined />}>
+          <Menu.Item key="type" icon={<RadarChartOutlined />}>
             Type Prediction
           </Menu.Item>
           <Menu.Item key="condition" icon={<VaccinesIcon />}>
@@ -108,8 +108,11 @@ function App() {
           <Menu.Item key="yield" icon={<LineChartOutlined />}>
             Yield Prediction
           </Menu.Item>
+          <Menu.Item key="retro" icon={<ApartmentOutlined />}>
+            Retrosynthesis
+          </Menu.Item>
           <Menu.Item key="database" icon={<DatabaseOutlined />}>
-            Reaction Database
+          Reaction Database
           </Menu.Item>
           <Menu.Item key="update" icon={<HistoryOutlined />}>
             Update History
@@ -128,7 +131,7 @@ function App() {
             alignItems: 'center'
           }}
         >
-          <CustomButton onClick={scrollToFooter} style={{display:"flex",justifyContent:"right",alignItems:"center"}}>
+          <CustomButton onClick={scrollToFooter} style={{ display: "flex", justifyContent: "right", alignItems: "center" }}>
             <QuestionCircleOutlined />
             About
           </CustomButton>
@@ -139,6 +142,7 @@ function App() {
           {page === "type" && <ReactionType />}
           {page === "condition" && <ReactionCondition />}
           {page === "yield" && <ReactionYield />}
+          {page === "retro" && <Retrosynthesis />}
           {page === "database" && <ReactionDatabase />}
           {page === "update" && <UpdateHistory />}
         </Content>

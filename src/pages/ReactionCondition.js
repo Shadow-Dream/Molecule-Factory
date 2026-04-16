@@ -191,7 +191,8 @@ const ReactionCondition = () => {
             available: <p style={{ color: "gray" }}>comming soon</p>
         },
     ];
-
+    const latestTaskIdRef = useRef(taskId);
+    useEffect(() => { latestTaskIdRef.current = taskId; }, [taskId]);
     const intervalIdRef = useRef(null);
     useEffect(() => {
         if (taskId !== "") {
@@ -213,7 +214,11 @@ const ReactionCondition = () => {
                     if ("result" in response.data)
                         setResults(prevResults => { prevResults["result"] = response.data.result });
                 }).catch(error => {
-                    setInferencing(false);
+                    if(latestTaskIdRef.current === taskId){
+                        dispatch(clearCondition());
+                        setResults(prevResults => { prevResults["status"] = "failed"});
+                        setInferencing(false);
+                    }
                 });
             }, 1000);
         }
